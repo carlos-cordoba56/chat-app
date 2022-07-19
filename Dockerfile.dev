@@ -13,9 +13,15 @@ RUN pip install --no-cache-dir --upgrade -r ./chat-app/app/requirements-dev.txt
 
 # Define environment variables
 ENV APP_NAME "super-app"
+ENV DATABASE_USERNAME "myusername"
+ENV DATABASE_PASSWORD "mypassword"
+ENV DATABASE_HOSTNAME "postgresql"
+ENV DATABASE_PORT "5432"
+ENV DATABASE_NAME "postgres"
 
 COPY ./app ./chat-app/app
 
 EXPOSE 8080
+EXPOSE 5432
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]

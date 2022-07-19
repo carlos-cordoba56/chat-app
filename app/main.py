@@ -5,11 +5,16 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
 from app.settings import settings
-from app.routers.chat_room import router
+from app.routers.chatrooms import router
+from app.database.database import engine
+from app.database.models import Base
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
 app.include_router(router)
+
 
 @app.get("/", response_class=HTMLResponse)
 async def home():
