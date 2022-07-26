@@ -4,12 +4,12 @@ WORKDIR /chat-app
 
 
 # Copy the dependencies
-COPY ./requirements.txt ./chat-app/app/requirements.txt
-COPY ./requirements-dev.txt ./chat-app/app/requirements-dev.txt
+COPY ./requirements.txt ./requirements.txt
+COPY ./requirements-dev.txt ./requirements-dev.txt
 
 # install packages
-RUN pip install --no-cache-dir --upgrade -r ./chat-app/app/requirements.txt
-RUN pip install --no-cache-dir --upgrade -r ./chat-app/app/requirements-dev.txt
+RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
+RUN pip install --no-cache-dir --upgrade -r ./requirements-dev.txt
 
 # Define environment variables
 ENV APP_NAME "super-app"
@@ -19,7 +19,7 @@ ENV DATABASE_HOSTNAME "postgresql"
 ENV DATABASE_PORT "5432"
 ENV DATABASE_NAME "postgres"
 
-COPY ./app ./chat-app/app
+COPY ./ .
 
 EXPOSE 8080
 EXPOSE 5432
