@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat</title>
+        
+        <style>
+            body{
+                display: flex;
+                justify-content: center;
+            }
+            .container{
+                display: block;
+            }
+    
+            .container .message-stack {
+                border: 2px solid;
+                width: 400px;
+                height: 400px;
+                margin: 20px auto 10px;
+                overflow-y: auto;
+                /* overflow:hidden; */
+            }
+            .container .message-stack .message{
+                /* border: .01px solid; */
+                background-color: antiquewhite;
+            }
+            .container form{
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    
+    <body onload="loadApp()">
+        <div class="container">
+            <h1>WebSocket Chat</h1>
+            <h2>Your ID: <span id="ws-id"></span></h2>
+            <div class="message-stack" id="message-stack"></div>
+            <div class="chatrooms"></div>
+            <form action="" onsubmit="sendMessage(event)">
+                <input type="text" id="messageText" autocomplete="off"/>
+                <button>Send</button>
+            </form>
+            <ul id='messages'>
+            </ul>
+            <div>
+                <a href={{url_for('index')}}>Return</a> <br>
+                <a href={{url_for('logout')}}>Log Out</a>
+            </div>
+        </div>
+        <script src="index.js">
+            
+        </script>
+    </body>
+</html>
