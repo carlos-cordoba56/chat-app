@@ -2,6 +2,9 @@ FROM python:3.9
 
 WORKDIR /chat-app
 
+# ENV PYTHONDONTWRITEBYTECODE 1
+# ENV PYTHONUNBUFFERED 1
+
 
 # Copy the dependencies
 COPY ./requirements.txt ./requirements.txt
@@ -13,15 +16,5 @@ RUN pip install --no-cache-dir --upgrade -r ./requirements-dev.txt
 
 # Define environment variables
 ENV APP_NAME "super-app"
-ENV DATABASE_USERNAME "myusername"
-ENV DATABASE_PASSWORD "mypassword"
-ENV DATABASE_HOSTNAME "postgresql"
-ENV DATABASE_PORT "5432"
-ENV DATABASE_NAME "postgres"
 
-COPY ./ .
-
-EXPOSE 8080
-EXPOSE 5432
-
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
+COPY ./ ./app
