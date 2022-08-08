@@ -3,3 +3,6 @@ uvicorn==0.15.0
 SQLAlchemy==1.4.27
 psycopg2==2.9.2
 websockets==10.3
+passlib==1.7.4
+python-jose==3.3.0
+python-multipart==0.0.5

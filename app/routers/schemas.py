@@ -1,9 +1,20 @@
 """
 Validation schemas for routers
 """
-from datetime import datetime
 import json
+from datetime import datetime
 from pydantic import BaseModel
+
+
+class UserResponce(BaseModel):
+    username: str
+    email: str
+
+    class Config:
+        orm_mode = True
+
+class User(UserResponce):
+    password: str
 
 
 class CreateChatroomRequest(BaseModel):
@@ -38,6 +49,7 @@ class PostMessageResponce(PostMessageRequest):
     """
     chatroom_id: str
     created_at: datetime
+    # sender_id: UserResponce
     class Config:
         orm_mode = True
     

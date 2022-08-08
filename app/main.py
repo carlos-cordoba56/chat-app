@@ -4,11 +4,13 @@ main file for application
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
+# from app import oauth2
 from app.routers.schemas import PostMessageResponce
 
 from app.settings import settings
-from app.routers.chatrooms import router
+from app.routers import chatrooms, users, auth
 from app.database.database import engine, get_db
 from app.database.models import Base
 from app.database.models import Message
@@ -18,7 +20,9 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-app.include_router(router)
+app.include_router(chatrooms.router)
+app.include_router(users.router)
+app.include_router(auth.router)
 
 origins = [
     "*",
@@ -44,15 +48,16 @@ from fastapi import WebSocket, WebSocketDisconnect
 async def chat_websocket_endpoint(
     websocket: WebSocket,
     id: str,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    # currrent_user = Depends(oauth2.get_current_user),
 ):
     """
     chat_websocket_endpoint
     socket to mantain the connection between server and client
 
     Args:
-        websocket (WebSocket): _description_
-        id (str): _description_
+        websocket (WebSocket): socket objec to cummunicate with the client
+        id (str): the id from the chatroom to broadcast the message to
     """
     connection = ChatroomConnection(websocket, id)
     await connection_manager.connect(connection)
@@ -61,7 +66,11 @@ async def chat_websocket_endpoint(
             # receive information
             data = await websocket.receive_json()
             # save message in the db
-            new_message = Message(message=data["message"], chatroom_id=id)
+            new_message = Message(
+                message=data["message"],
+                chatroom_id=id,
+                sender_id=data["sender_id"]
+            )
             db.add(new_message)
             db.commit()
             db.refresh(new_message)
