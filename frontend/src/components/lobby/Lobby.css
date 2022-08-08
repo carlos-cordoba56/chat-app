@@ -1,0 +1,10 @@
+.chatrooms {
+    border: 2px dashed;
+    width: 250px;
+    height: 200px;
+    margin: 20px auto 10px;
+}
+
+.chatrooms a {
+    display: block;
+}

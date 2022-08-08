@@ -1,0 +1,19 @@
+
+    
+.message-stack {
+    border: 2px solid;
+    width: 400px;
+    height: 400px;
+    margin: 20px auto 10px;
+    overflow-y: auto;
+    /* overflow:hidden; */
+}
+.message-stack .message{
+    /* border: .01px solid; */
+    background-color: antiquewhite;
+}
+form{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}

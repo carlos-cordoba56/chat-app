@@ -1,0 +1,9 @@
+#login-form{
+    padding: 10px;
+    display: block;
+    justify-content: center;
+    border: 2px solid;
+    width: 250px;
+    height: 150px;
+    margin: 20px auto 10px;
+}

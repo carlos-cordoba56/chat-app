@@ -29,13 +29,13 @@ services:
       - POSTGRES_USER=myusername
       - POSTGRES_PASSWORD=mypassword
       - POSTGRES_DB=postgresql
-  # frontend:
-  #   build: ./frontend
-  #   container_name: frontend
-  #   ports:
-  #     - 8080:80
-  #   depends_on:
-  #     - server
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - 8080:80
+    depends_on:
+      - server
 
 volumes:
   db_data:
